@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// This is global variable, do not modify
 #define MAX_STUDENTS 5
 
 struct Student {
@@ -13,42 +12,161 @@ struct Student {
 	float studentGrades;
 };
 
-/*!
-* Function Prototypes
-*/
-void printMenu();
-void highestGrade(Student students[], int count);
-void lowestGrade(Student students[], int count);
-void averageGrade(Student students[], int count);
-void printStudentId(Student students[], int count);
-void printStudentName(Student students[], int count);
+void printMenu() {
+	cout << "\n=== Student Record System ===\n";
+	cout << "1. Find student with the highest grade\n";
+	cout << "2. Find the student with the lowest grade\n";
+	cout << "3. Find the average grade in the class\n";
+	cout << "4. Print all the student's ID\n";
+	cout << "5. Print all the student's names\n";
+	cout << "6. Exit\n";
+}
+
+void highestGrade(Student students[], int count)
+{
+	if (count == 0) {
+		cout << "No students in the record.\n";
+		return;
+	}
+
+    float highestGrade = students[0].studentGrades;
+
+    for (int i = 0; i < count; i++)
+    {
+        if (students[i].studentGrades > highestGrade)
+        {
+            highestGrade = students[i].studentGrades;
+        }
+    }
+    cout << "Highest grade:" << endl;
+    cout << highestGrade << endl;
+    cout << "Student name:" << endl;
+
+    for (int i = 0; i < count; i++)
+    {
+        if (students[i].studentGrades == highestGrade)
+        {
+            cout << students[i].studentName << endl;
+        }
+    }
+
+}
+void lowestGrade(Student students[], int count)
+{
+	if (count == 0) {
+		cout << "No students in the record.\n";
+		return;
+	}
+
+    float lowestGrade = students[0].studentGrades;
+
+    for (int i = 0; i < count; i++)
+    {
+        if (students[i].studentGrades < lowestGrade)
+        {
+            lowestGrade = students[i].studentGrades;
+        }
+    }
+    cout << "Lowest grade:" << endl;
+    cout << lowestGrade << endl;
+    cout << "Student name:" << endl;
+
+    for (int i = 0; i < count; i++)
+    {
+        if (students[i].studentGrades == lowestGrade)
+        {
+            cout << students[i].studentName << endl;
+        }
+    }
+}
+
+void averageGrade(Student students[], int count)
+{
+    if (count == 0) {
+		cout << "No students in the record.\n";
+		return;
+	}
+
+    float sum = 0;
+    for (int i = 0; i < count; i++)
+    {
+        sum += students[i].studentGrades;
+    }
+
+    float averageGrade = sum / count;
+
+    cout << "Average grade: " << averageGrade << endl;
+}
+void printStudentId(Student students[], int count)
+{
+    if (count == 0) {
+		cout << "No students in the record.\n";
+		return;
+	}
+
+	cout << "Student ID:" << endl;
+
+    for (int i = 0; i < count; i++)
+    {
+        cout << students[i].studentId << endl;
+    }
+}
+void printStudentName(Student students[], int count)
+{
+    if (count == 0) {
+		cout << "No students in the record.\n";
+		return;
+	}
+    
+	cout << "Student name:" << endl;
+
+    for (int i = 0; i < count; i++)
+    {
+        cout << students[i].studentName << endl;
+    }
+}
 
 int main() {
-	Student students[MAX_STUDENTS];
-	int count = 0;  // this keeps track of the students that are in the class
-	int choice;     // user input
+	int count = 0;  
+	int choice;    
 
-	/*!
-	* Add the students here!
-	*/
-	//----------------------------------------------------------------------------------------
+    Student stu1;
+    Student stu2;
+    Student stu3;
+    Student stu4;
+    Student stu5;
+    count = 5;
+
+    stu1.studentName = "Alex";
+    stu1.studentId = 1;
+    stu1.studentGrades = 87.5;
+
+    stu2.studentName = "Bob";
+    stu2.studentId = 2;
+    stu2.studentGrades = 97.0;
+
+    stu3.studentName = "Chris";
+    stu3.studentId = 3;
+    stu3.studentGrades = 92.0;
+
+    stu4.studentName = "David";
+    stu4.studentId = 4;
+    stu4.studentGrades = 60.0;
+
+    stu5.studentName = "Eli";
+    stu5.studentId = 5;
+    stu5.studentGrades = 97.0;
+
+    cout << fixed << setprecision(1);
+
+    Student students[MAX_STUDENTS] = {stu1, stu2, stu3, stu4, stu5};
 
 
-
-
-
-
-
-
-
-	//----------------------------------------------------------------------------------------
-
-	// Complete the menu with the associated function
 	do {
 		printMenu();
 		cout << "Enter your choice: ";
 		cin >> choice;
-		cin.ignore();  // we add this to consume the leftover newline
+		cin.ignore();  
 
 		switch (choice) {
 		case 1:
@@ -77,46 +195,3 @@ int main() {
 	return 0;
 }
 
-void printMenu() {
-	cout << "\n=== Student Record System ===\n";
-	cout << "1. Find student with the highest grade\n";
-	cout << "2. Find the student with the lowest grade\n";
-	cout << "3. Find the average grade in the class\n";
-	cout << "4. Print all the student's ID\n";
-	cout << "5. Print all the student's names\n";
-	cout << "6. Exit\n";
-}
-
-/* TODO: Implement these functions */
-
-// Remeber, if you pass an array into a function, it is a pass by reference!
-// Because arrays decay to pointers, so you are getting a pointer to the first element
-// which allows you to modify the data. 
-
-void highestGrade(Student students[], int count)
-{
-	// TODO: Print out all the highest grade in the array
-
-	// Here is a simple check to ensure your code does not break
-	if (count == 0) {
-		cout << "No students in the record.\n";
-		return;
-	}
-}
-void lowestGrade(Student students[], int count)
-{
-	// TODO: Print out all the lowest grade in the array
-}
-
-void averageGrade(Student students[], int count)
-{
-	// TODO: Print out the average grade of the students
-}
-void printStudentId(Student students[], int count)
-{
-	// TODO: Print out all the students id in the array
-}
-void printStudentName(Student students[], int count)
-{
-	// TODO: Print out all the students name in the array
-}
